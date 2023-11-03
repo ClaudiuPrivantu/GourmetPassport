@@ -1,8 +1,20 @@
 import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {Header, Footer} from './components';
+import {Home, Contact} from './pages';
 
 function App() {
   return (
-      <h1>GourmetPassport - taste the entire world!</h1>
+      <>
+        <BrowserRouter>
+          <Header/>
+            <Routes>
+              <Route path='/' element={ <Home/> }/>
+              <Route path='/contact' element={ <Contact/> }/>
+            </Routes>
+          <Footer/>
+        </BrowserRouter>
+      </>
   );
 }
 
