@@ -1,0 +1,60 @@
+{
+  "name": "gourmetpassport-ecommerce",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "web-vitals": "^2.1.4",
+    "@emailjs/browser": "^3.9.0",
+    "@reduxjs/toolkit": "^1.8.6",
+    "@stripe/react-stripe-js": "^1.14.1",
+    "@stripe/stripe-js": "^1.42.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "bootstrap": "^5.2.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "firebase": "^9.12.1",
+    "node-sass": "^7.0.3",
+    "notiflix": "^3.2.5",
+    "react": "^16.13.1",
+    "react-bootstrap": "^2.5.0",
+    "react-chartjs-2": "^4.3.1",
+    "react-country-region-selector": "^3.6.1",
+    "react-dom": "^16.13.1",
+    "react-icons": "^4.6.0",
+    "react-redux": "^8.0.4",
+    "react-router-dom": "^6.4.2",
+    "react-scripts": "^5.0.1",
+    "react-star-rate": "^0.2.0",
+    "react-toastify": "^9.0.8",
+    "stripe": "^10.15.0"
+  },
+  "scripts": {
+    "start:frontend": "react-scripts start",
+    "start:backend": "nodemon server.js",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
