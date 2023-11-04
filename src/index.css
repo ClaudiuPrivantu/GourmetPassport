@@ -8,6 +8,7 @@
   --color-white: #fff;
   --color-dark: #333;
   --color-black: black;
+  --color-darkorange: #1B1A17;
 
   --color-grey: #eee;
   --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -17,7 +18,7 @@
 
   --color-primary: #007bff;
   --color-success: #28a745;
-  --color-danger: orangered;
+  --color-danger: #E45826;
 }
 
 * {
@@ -300,7 +301,7 @@ p {
 
 .--btn-primary {
   color: #fff;
-  background: #007bff;
+  background: #F0A500;
 }
 .--btn-secondary {
   color: #fff;
@@ -309,7 +310,7 @@ p {
 }
 .--btn-danger {
   color: #fff;
-  background: orangered;
+  background: rgb(117, 90, 137);
 }
 
 .--btn-success {

@@ -8,7 +8,7 @@
 
 header {
   width: 100%;
-  background-color: var(--color-black);
+  background-color: var(--color-darkorange);
   color: #fff;
 
   .header {
@@ -29,7 +29,7 @@ header {
     cursor: pointer;
 
     span {
-      color: orangered;
+      color: var(--color-danger);
     }
   }
 
