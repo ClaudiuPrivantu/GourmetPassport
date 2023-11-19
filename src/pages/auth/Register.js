@@ -20,7 +20,7 @@ const Register = () => {
     const registerUser = (e) => {
         e.preventDefault();
         if (password !== cPassword) {
-            toast.error("Passwords do not match.")
+            toast.error("Parolele nu se potrivesc!")
         }
         setIsLoading(true)
 
@@ -30,7 +30,7 @@ const Register = () => {
                 const user = userCredential.user;
                 console.log(user)
                 setIsLoading(false)
-                toast.success("Registration Successful...")
+                toast.success("V-ați înregistrat cu succes!")
                 navigate("/")
 
             })
@@ -46,7 +46,7 @@ const Register = () => {
             <section className={`container ${styles.auth}`}>
                 <Card>
                     <div className={styles.form}>
-                        <h2>Register</h2>
+                        <h2>Înregistrează-te</h2>
                         <form onSubmit={registerUser}>
                             <input
                                 type="text"
@@ -56,24 +56,24 @@ const Register = () => {
                             />
                             <input
                                 type="password"
-                                placeholder="Password"
+                                placeholder="Parolă"
                                 required value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             <input
                                 type="password"
-                                placeholder="Confirm password"
+                                placeholder="Confirmare parolă"
                                 required value={cPassword}
                                 onChange={(e) => setCPassword(e.target.value)}
                             />
 
                             <button type="submit" className="--btn --btn-primary --btn-block">
-                                Register
+                                Înregistrează-te
                             </button>
                         </form>
                         <span className={styles.register}>
                             <p>
-                                Already have an account?
+                                Aveți deja un cont?
                             </p>
                             <Link to="/login">Login</Link>
                         </span>

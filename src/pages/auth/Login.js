@@ -27,7 +27,7 @@ const Login = () => {
                 const user = userCredential.user;
                 console.log(user)
                 setIsLoading(false)
-                toast.success("Login Successful...")
+                toast.success("V-ați autentificat cu succes!")
                 navigate("/")
             })
             .catch((error) => {
@@ -42,7 +42,7 @@ const Login = () => {
             .then((result) => {
                 const user = result.user;
                 console.log(user)
-                toast.success("Login Successfully")
+                toast.success("V-ați autentificat cu succes!")
                 navigate("/")
             }).catch((error) => {
                 toast.error(error.message)
@@ -68,7 +68,7 @@ const Login = () => {
                             />
                             <input
                                 type="password"
-                                placeholder="Password"
+                                placeholder="Parolă"
                                 required value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
@@ -78,18 +78,18 @@ const Login = () => {
                             </button>
 
                             <div className={styles.links}>
-                                <Link to="/reset">Reset Password</Link>
+                                <Link to="/reset">Resetare parolă</Link>
                             </div>
-                            <p>-- or --</p>
+                            <p>sau</p>
                         </form>
                         <button className="--btn --btn-danger --btn-block" onClick={signInWithGoogle}>
-                            <FaGoogle color="#fff" /> Login With Google
+                            <FaGoogle color="#fff" /> Conectați-vă cu Google
                         </button>
                         <span className={styles.register}>
                             <p>
-                                Don't have an account?
+                                Nu aveți un cont creat?
                             </p>
-                            <Link to="/register">Register</Link>
+                            <Link to="/register">Înregistrați-vă</Link>
                         </span>
                     </div>
                 </Card>

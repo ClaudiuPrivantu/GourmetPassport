@@ -20,7 +20,7 @@ const Reset = () => {
         sendPasswordResetEmail(auth, email)
             .then(() => {
                 setIsLoading(false)
-                toast.success("Check your email for a reset link")
+                toast.success("Verificați-vă email-ul pentru pentru un link de resetare a parolei!")
             })
             .catch((error) => {
                 setIsLoading(false)
@@ -30,36 +30,36 @@ const Reset = () => {
 
     return (
         <>
-        {isLoading && <Loader />}
-        <section className={`container ${styles.auth}`}>
-            <div className={styles.img}>
-                <img src={resetImg} alt="Reset password" width="400" />
-            </div>
-            <Card>
-                <div className={styles.form}>
-                    <h2>Reset password</h2>
-                    <form onSubmit={resetPassword}>
-                        <input
-                            type="text"
-                            placeholder="Email"
-                            required value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <button type="submit" className="--btn --btn-primary --btn-block">
-                            Reset password
-                        </button>
-                        <div className={styles.links}>
-                            <p>
-                                <Link to="/login">Login</Link>
-                            </p>
-                            <p>
-                                <Link to="/register">Register</Link>
-                            </p>
-                        </div>
-                    </form>
+            {isLoading && <Loader />}
+            <section className={`container ${styles.auth}`}>
+                <div className={styles.img}>
+                    <img src={resetImg} alt="Reset password" width="400" />
                 </div>
-            </Card>
-        </section>
+                <Card>
+                    <div className={styles.form}>
+                        <h2>Resetare parolă</h2>
+                        <form onSubmit={resetPassword}>
+                            <input
+                                type="text"
+                                placeholder="Email"
+                                required value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <button type="submit" className="--btn --btn-primary --btn-block">
+                                Resetare parolă
+                            </button>
+                            <div className={styles.links}>
+                                <p>
+                                    <Link to="/login">Login</Link>
+                                </p>
+                                <p>
+                                    <Link to="/register">Înregistrați-vă</Link>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </Card>
+            </section>
         </>
     )
 }

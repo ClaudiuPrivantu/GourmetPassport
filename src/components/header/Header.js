@@ -23,7 +23,7 @@ const logo = (
 const cart = (
   <span className={styles.cart}>
     <Link to="/cart">
-      Cart
+      Coșul meu
       <FaShoppingCart size={20} />
       <p>0</p>
     </Link>
@@ -74,7 +74,7 @@ const Header = () => {
   const logoutUser = () => {
     signOut(auth)
       .then(() => {
-        toast.success("Logout successfully")
+        toast.success("V-ați deconectat cu succes!")
         navigate("/")
       }).catch((error) => {
         toast.error(error.message)
@@ -102,12 +102,12 @@ const Header = () => {
             </li>
             <li>
               <NavLink to="/" className={activeLink}>
-                Home
+                Acasă
               </NavLink>
             </li>
             <li>
               <NavLink to="/contact" className={activeLink}>
-                Contact Us
+                Contactează-ne
               </NavLink>
             </li>
           </ul>
@@ -119,9 +119,9 @@ const Header = () => {
               <ShowOnLogin>
                 <a href="#home" style={{ color: "#F0A500" }}>
                   <FaUserCircle size={16} />
-                  Hi, {displayName}
+                  Bună, {displayName}
                 </a>
-                <NavLink to="/order-history" className={activeLink}>My Orders</NavLink>
+                <NavLink to="/order-history" className={activeLink}>Comenzile mele</NavLink>
                 <NavLink to="/" onClick={logoutUser}>Logout</NavLink>
               </ShowOnLogin>
             </span>
