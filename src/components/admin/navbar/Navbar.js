@@ -20,22 +20,22 @@ const Navbar = () => {
         <ul>
           <li>
             <NavLink to="/admin/home" className={activeLink}>
-              Home
+              Panou general
             </NavLink>
           </li>
           <li>
             <NavLink to="/admin/all-products" className={activeLink}>
-              All Products
+              Toate produsele
             </NavLink>
           </li>
           <li>
-            <NavLink to="/admin/add-product" className={activeLink}>
-              Add Product
+            <NavLink to="/admin/add-product/ADD" className={activeLink}>
+              Adaugă produs
             </NavLink>
           </li>
           <li>
             <NavLink to="/admin/orders" className={activeLink}>
-              Orders
+              Comenzi
             </NavLink>
           </li>
         </ul>
