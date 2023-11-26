@@ -25,12 +25,12 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink to="/admin/all-products" className={activeLink}>
-              Toate produsele
+              Toate preparatele
             </NavLink>
           </li>
           <li>
             <NavLink to="/admin/add-product/ADD" className={activeLink}>
-              Adaugă produs
+              Adaugă un preparat
             </NavLink>
           </li>
           <li>

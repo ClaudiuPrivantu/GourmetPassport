@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Card from '../../card/Card';
 import styles from './AddProduct.module.scss'
+import { ref, uploadBytesResumable } from 'firebase/storage';
+import { storage } from '../../../firebase/config';
 
 const continents = [
   { id: 1, name: "Europa" },
@@ -26,6 +28,9 @@ const AddProduct = () => {
   };
 
   const handleImageChange = (e) => {
+    const file = e.target.files[0]
+    const storageRef = ref(storage, `gourmet_images/${Date.now()}${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
   };
 
   const addProduct = (e) => {
