@@ -3,6 +3,9 @@ import styles from './ViewProducts.module.scss'
 import { toast } from 'react-toastify'
 import { collection, doc, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '../../../firebase/config'
+import { Link } from 'react-router-dom'
+import { FaEdit, FaTrashAlt } from 'react-icons/fa'
+import Loader from '../../loader/Loader'
 
 const ViewProducts = () => {
   const [products, setProducts] = useState([])
@@ -27,6 +30,7 @@ const ViewProducts = () => {
         }));
         console.log(allProducts);
         setProducts(allProducts);
+        setIsLoading(false);
       });
 
     } catch (error) {
@@ -36,8 +40,68 @@ const ViewProducts = () => {
   };
 
   return (
-    <div>ViewProducts</div>
-  )
+    <>
+      {isLoading && <Loader />}
+      <div className={styles.table}>
+        <h2>Toate preparatele</h2>
+
+        <div className={styles.search}>
+          <p>
+            <b>{products.length}</b> produse disponibile
+          </p>
+        </div>
+
+        {products.length === 0 ? (
+          <p>Nu a fost găsit niciun produs.</p>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>S/N</th>
+                <th>Imagine</th>
+                <th>Nume</th>
+                <th>Origine</th>
+                <th>Preț</th>
+                <th>Acțiuni</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map((product, index) => {
+                const { id, name, price, imageURL, country, continent } = product;
+                return (
+
+                  <tr key={id}>
+                    <td>{index + 1}</td>
+                    <td>
+                      <img
+                        src={imageURL}
+                        alt={name}
+                        style={{ width: "100px" }}
+                      />
+                    </td>
+                    <td>{name}</td>
+                    <td>{`${continent} - ${country}`}</td>
+                    <td>{`${price} LEI`}</td>
+                    <td className={styles.icons}>
+                      <Link to={`/admin/add-product/${id}`}>
+                        <FaEdit size={20} color="green" />
+                      </Link>
+                      &nbsp;
+                      <FaTrashAlt
+                        size={18}
+                        color="red"
+                      />
+                    </td>
+                  </tr>
+
+                );
+              })}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </>
+  );
 }
 
 export default ViewProducts
