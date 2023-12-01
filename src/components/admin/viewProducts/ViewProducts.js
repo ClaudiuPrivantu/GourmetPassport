@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import Loader from '../../loader/Loader'
 import { deleteObject, ref } from 'firebase/storage'
+import Notiflix from 'notiflix'
 
 const ViewProducts = () => {
   const [products, setProducts] = useState([])
@@ -38,6 +39,28 @@ const ViewProducts = () => {
       setIsLoading(false)
       toast.error(error.message)
     }
+  };
+
+  const confirmDelete = (id, imageURL) => {
+    Notiflix.Confirm.show(
+      "Sunteți sigur?",
+      "Sunteți pe cale să ștergeți acest preparat.",
+      "Da, sunt sigur",
+      "Nu, nu sunt",
+      function okCb() {
+        deleteProduct(id, imageURL);
+      },
+      function cancelCb() {
+        console.log("Delete Canceled");
+      },
+      {
+        width: "320px",
+        borderRadius: "3px",
+        titleColor: "orangered",
+        okButtonBackground: "orangered",
+        cssAnimationStyle: "zoom",
+      }
+    );
   };
 
   const deleteProduct = async (id, imageURL) => {
@@ -103,7 +126,7 @@ const ViewProducts = () => {
                       <FaTrashAlt
                         size={18}
                         color="red"
-                        onClick={() => deleteProduct(id, imageURL)}
+                        onClick={() => confirmDelete(id, imageURL)}
                       />
                     </td>
                   </tr>
