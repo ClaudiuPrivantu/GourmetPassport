@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ViewProducts.module.scss'
 import { toast } from 'react-toastify'
-import { collection, doc, onSnapshot, orderBy, query } from 'firebase/firestore'
-import { db } from '../../../firebase/config'
+import { collection, deleteDoc, doc, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { db, storage } from '../../../firebase/config'
 import { Link } from 'react-router-dom'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import Loader from '../../loader/Loader'
+import { deleteObject, ref } from 'firebase/storage'
 
 const ViewProducts = () => {
   const [products, setProducts] = useState([])
@@ -36,6 +37,18 @@ const ViewProducts = () => {
     } catch (error) {
       setIsLoading(false)
       toast.error(error.message)
+    }
+  };
+
+  const deleteProduct = async (id, imageURL) => {
+    try {
+      await deleteDoc(doc(db, "products", id));
+
+      const storageRef = ref(storage, imageURL);
+      await deleteObject(storageRef);
+      toast.success("Preparatul a fost șters cu succes!");
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
@@ -90,6 +103,7 @@ const ViewProducts = () => {
                       <FaTrashAlt
                         size={18}
                         color="red"
+                        onClick={() => deleteProduct(id, imageURL)}
                       />
                     </td>
                   </tr>
