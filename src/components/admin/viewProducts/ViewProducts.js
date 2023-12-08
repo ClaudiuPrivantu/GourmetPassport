@@ -1,54 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import styles from './ViewProducts.module.scss'
 import { toast } from 'react-toastify'
-import { collection, deleteDoc, doc, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { deleteDoc, doc } from 'firebase/firestore'
 import { db, storage } from '../../../firebase/config'
 import { Link } from 'react-router-dom'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import Loader from '../../loader/Loader'
 import { deleteObject, ref } from 'firebase/storage'
 import Notiflix from 'notiflix'
-import { useDispatch } from 'react-redux'
-import { STORE_PRODUCTS } from '../../../redux/slice/productSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { STORE_PRODUCTS, selectProducts } from '../../../redux/slice/productSlice'
+import useFetchCollection from '../../../customHooks/useFetchCollection'
 
 const ViewProducts = () => {
-  const [products, setProducts] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  const { data, isLoading } = useFetchCollection("products")
+  const products = useSelector(selectProducts)
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getProducts()
-  }, [])
-
-  const getProducts = () => {
-    setIsLoading(true)
-
-    try {
-      const productsRef = collection(db, "products");
-      const q = query(productsRef, orderBy("createdAt", "desc"));
-
-      onSnapshot(q, (snapshot) => {
-        // console.log(snapshot.docs);
-        const allProducts = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        // console.log(allProducts);
-        setProducts(allProducts);
-        setIsLoading(false);
-        dispatch(
-          STORE_PRODUCTS({
-            products: allProducts,
-          })
-        )
-      });
-
-    } catch (error) {
-      setIsLoading(false)
-      toast.error(error.message)
-    }
-  };
+    dispatch(
+      STORE_PRODUCTS({
+        products: data,
+      })
+    );
+  }, [dispatch, data]);
 
   const confirmDelete = (id, imageURL) => {
     Notiflix.Confirm.show(
