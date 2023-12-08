@@ -20,7 +20,7 @@ const ProductList = ({ products }) => {
             onClick={() => setGrid(true)}
           />
 
-          <FaListAlt size={24} color="rgb(117, 90, 137)"  onClick={() => setGrid(false)} />
+          <FaListAlt size={24} color="rgb(117, 90, 137)" onClick={() => setGrid(false)} />
 
           <p>
             <b>10</b> preparate găsite
