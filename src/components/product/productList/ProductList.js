@@ -3,15 +3,12 @@ import styles from './ProductList.module.scss'
 import { BsFillGridFill } from "react-icons/bs";
 import { FaListAlt } from "react-icons/fa";
 import Search from '../../search/Search';
-import { useDispatch } from 'react-redux';
 import ProductItem from '../productItem/ProductItem';
 
 const ProductList = ({ products }) => {
   const [grid, setGrid] = useState(true);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("latest");
-
-  const dispatch = useDispatch();
 
   return (
     <div className={styles["product-list"]} id="product">
@@ -23,7 +20,7 @@ const ProductList = ({ products }) => {
             onClick={() => setGrid(true)}
           />
 
-          <FaListAlt size={24} color="#0066d4" onClick={() => setGrid(false)} />
+          <FaListAlt size={24} color="rgb(117, 90, 137)"  onClick={() => setGrid(false)} />
 
           <p>
             <b>10</b> preparate găsite
