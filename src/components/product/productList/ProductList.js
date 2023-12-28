@@ -32,7 +32,7 @@ const ProductList = ({ products }) => {
           <FaListAlt size={24} color="rgb(117, 90, 137)" onClick={() => setGrid(false)} />
 
           <p>
-            <b>10</b> preparate găsite
+            <b>{filteredProducts.length}</b> preparate găsite
           </p>
         </div>
         {/* Search Icon */}
