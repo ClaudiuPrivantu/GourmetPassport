@@ -62,13 +62,24 @@ const filterSlice = createSlice({
             }
             state.filteredProducts = tempProducts;
         },
+        FILTER_BY_COUNTRY(state, action) {
+            const { products, country } = action.payload;
+            let tempProducts = [];
+            if (country === "Toate") {
+                tempProducts = products;
+            } else {
+                tempProducts = products.filter((product) => product.country === country);
+            }
+            state.filteredProducts = tempProducts;
+        },
     },
 });
 
 export const {
     FILTER_BY_SEARCH,
     SORT_PRODUCTS,
-    FILTER_BY_CONTINENT
+    FILTER_BY_CONTINENT,
+    FILTER_BY_COUNTRY
 } = filterSlice.actions;
 
 export const selectFilteredProducts = (state) => state.filter.filteredProducts;

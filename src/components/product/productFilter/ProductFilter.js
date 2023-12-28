@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './ProductFilter.module.scss'
 import { selectProducts } from '../../../redux/slice/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { FILTER_BY_CONTINENT } from '../../../redux/slice/filterSlice';
+import { FILTER_BY_CONTINENT, FILTER_BY_COUNTRY } from '../../../redux/slice/filterSlice';
 
 const ProductFilter = () => {
   const [continent, setContinent] = useState("Toate");
+  const [country, setCountry] = useState("Toate");
   const products = useSelector(selectProducts);
 
   const dispatch = useDispatch();
@@ -14,6 +15,14 @@ const ProductFilter = () => {
     "Toate",
     ...new Set(products.map((product) => product.continent)),
   ];
+  const allCountries = [
+    "Toate",
+    ...new Set(products.map((product) => product.country)),
+  ];
+
+  useEffect(() => {
+    dispatch(FILTER_BY_COUNTRY({ products, country }));
+  }, [dispatch, products, country]);
 
   const filterProducts = (cont) => {
     setContinent(cont);
@@ -39,10 +48,14 @@ const ProductFilter = () => {
       </div>
       <h4>Țară de origine</h4>
       <div className={styles.country}>
-        <select name="brand">
-          <option value="all">
-            All
-          </option>
+        <select value={country} onChange={(e) => setCountry(e.target.value)}>
+          {allCountries.map((country, index) => {
+            return (
+              <option key={index} value={country}>
+                {country}
+              </option>
+            );
+          })}
         </select>
         <h4>Preț</h4>
         <p>1500</p>
