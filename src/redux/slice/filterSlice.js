@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     filteredProducts: [],
+    filteredProductsByContinent: [],
 };
 
 const filterSlice = createSlice({
@@ -19,31 +20,33 @@ const filterSlice = createSlice({
             state.filteredProducts = tempProducts;
         },
         SORT_PRODUCTS(state, action) {
-            const { products, sort } = action.payload;
+            const { sort } = action.payload;
             let tempProducts = [];
             if (sort === "latest") {
-                tempProducts = products;
+                tempProducts = state.filteredProducts.slice().sort((a, b) => {
+                    return b.createdAt - a.createdAt;
+                });
             }
 
             if (sort === "lowest-price") {
-                tempProducts = products.slice().sort((a, b) => {
+                tempProducts = state.filteredProducts.slice().sort((a, b) => {
                     return a.price - b.price;
                 });
             }
 
             if (sort === "highest-price") {
-                tempProducts = products.slice().sort((a, b) => {
+                tempProducts = state.filteredProducts.slice().sort((a, b) => {
                     return b.price - a.price;
                 });
             }
 
             if (sort === "a-z") {
-                tempProducts = products.slice().sort((a, b) => {
+                tempProducts = state.filteredProducts.slice().sort((a, b) => {
                     return a.name.localeCompare(b.name);
                 });
             }
             if (sort === "z-a") {
-                tempProducts = products.slice().sort((a, b) => {
+                tempProducts = state.filteredProducts.slice().sort((a, b) => {
                     return b.name.localeCompare(a.name);
                 });
             }
@@ -60,15 +63,16 @@ const filterSlice = createSlice({
                     (product) => product.continent === continent
                 );
             }
+            state.filteredProductsByContinent = tempProducts;
             state.filteredProducts = tempProducts;
         },
         FILTER_BY_COUNTRY(state, action) {
-            const { products, country } = action.payload;
+            const { country } = action.payload;
             let tempProducts = [];
             if (country === "Toate") {
-                tempProducts = products;
+                tempProducts = state.filteredProductsByContinent;
             } else {
-                tempProducts = products.filter((product) => product.country === country);
+                tempProducts = state.filteredProductsByContinent.filter((product) => product.country === country);
             }
             state.filteredProducts = tempProducts;
         },
@@ -76,9 +80,9 @@ const filterSlice = createSlice({
             const { products, price } = action.payload;
             let tempProducts = [];
             tempProducts = products.filter((product) => product.price <= price);
-      
+
             state.filteredProducts = tempProducts;
-          },
+        },
     },
 });
 
@@ -91,5 +95,7 @@ export const {
 } = filterSlice.actions;
 
 export const selectFilteredProducts = (state) => state.filter.filteredProducts;
+
+export const selectFilteredProductsByContinent = (state) => state.filter.filteredProductsByContinent;
 
 export default filterSlice.reducer;

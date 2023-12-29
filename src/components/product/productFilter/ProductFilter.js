@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './ProductFilter.module.scss'
 import { selectMaxPrice, selectMinPrice, selectProducts } from '../../../redux/slice/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { FILTER_BY_CONTINENT, FILTER_BY_COUNTRY, FILTER_BY_PRICE } from '../../../redux/slice/filterSlice';
+import { FILTER_BY_CONTINENT, FILTER_BY_COUNTRY, FILTER_BY_PRICE, selectFilteredProductsByContinent } from '../../../redux/slice/filterSlice';
 
 const ProductFilter = () => {
   const [continent, setContinent] = useState("Toate");
@@ -11,6 +11,7 @@ const ProductFilter = () => {
   const [price, setPrice] = useState(400);
   const minPrice = useSelector(selectMinPrice);
   const maxPrice = useSelector(selectMaxPrice);
+  const filteredProductsByContinent = useSelector(selectFilteredProductsByContinent);
 
   const dispatch = useDispatch();
 
@@ -18,10 +19,22 @@ const ProductFilter = () => {
     "Toate",
     ...new Set(products.map((product) => product.continent)),
   ];
-  const allCountries = [
+
+  const uniqueCountries = [
     "Toate",
-    ...new Set(products.map((product) => product.country)),
+    ...new Set(filteredProductsByContinent.map((product) => product.country)),
   ];
+
+  console.log(uniqueCountries);
+
+  const filterProducts = (cont) => {
+    setContinent(cont);
+    dispatch(FILTER_BY_CONTINENT({ products, continent: cont }));
+  };
+
+  useEffect(() => {
+    filterProducts("Toate");
+  }, []);
 
   useEffect(() => {
     dispatch(FILTER_BY_COUNTRY({ products, country }));
@@ -30,11 +43,6 @@ const ProductFilter = () => {
   useEffect(() => {
     dispatch(FILTER_BY_PRICE({ products, price }));
   }, [dispatch, products, price]);
-
-  const filterProducts = (cont) => {
-    setContinent(cont);
-    dispatch(FILTER_BY_CONTINENT({ products, continent: cont }));
-  };
 
   const clearFilters = () => {
     setContinent("Toate");
@@ -62,7 +70,7 @@ const ProductFilter = () => {
       <h4>Țară de origine</h4>
       <div className={styles.country}>
         <select value={country} onChange={(e) => setCountry(e.target.value)}>
-          {allCountries.map((country, index) => {
+          {uniqueCountries.map((country, index) => {
             return (
               <option key={index} value={country}>
                 {country}
