@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ProductFilter.module.scss'
-import { selectProducts } from '../../../redux/slice/productSlice';
+import { selectMaxPrice, selectMinPrice, selectProducts } from '../../../redux/slice/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { FILTER_BY_CONTINENT, FILTER_BY_COUNTRY } from '../../../redux/slice/filterSlice';
+import { FILTER_BY_CONTINENT, FILTER_BY_COUNTRY, FILTER_BY_PRICE } from '../../../redux/slice/filterSlice';
 
 const ProductFilter = () => {
   const [continent, setContinent] = useState("Toate");
   const [country, setCountry] = useState("Toate");
   const products = useSelector(selectProducts);
+  const [price, setPrice] = useState(400);
+  const minPrice = useSelector(selectMinPrice);
+  const maxPrice = useSelector(selectMaxPrice);
 
   const dispatch = useDispatch();
 
@@ -24,9 +27,19 @@ const ProductFilter = () => {
     dispatch(FILTER_BY_COUNTRY({ products, country }));
   }, [dispatch, products, country]);
 
+  useEffect(() => {
+    dispatch(FILTER_BY_PRICE({ products, price }));
+  }, [dispatch, products, price]);
+
   const filterProducts = (cont) => {
     setContinent(cont);
     dispatch(FILTER_BY_CONTINENT({ products, continent: cont }));
+  };
+
+  const clearFilters = () => {
+    setContinent("Toate");
+    setCountry("Toate");
+    setPrice(maxPrice);
   };
 
   return (
@@ -58,17 +71,18 @@ const ProductFilter = () => {
           })}
         </select>
         <h4>Preț</h4>
-        <p>1500</p>
+        <p>{`${price} LEI`}</p>
         <div className={styles.price}>
           <input
             type="range"
-            name="price"
-            min={100}
-            max={1000}
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            min={minPrice}
+            max={maxPrice}
           />
         </div>
         <br />
-        <button className="--btn --btn-danger">
+        <button className="--btn --btn-danger" onClick={clearFilters}>
           Șterge filtrele
         </button>
       </div>

@@ -3,7 +3,7 @@ import styles from './Product.module.scss'
 import ProductFilter from './productFilter/ProductFilter';
 import ProductList from './productList/ProductList';
 import useFetchCollection from '../../customHooks/useFetchCollection';
-import { STORE_PRODUCTS, selectProducts } from '../../redux/slice/productSlice';
+import { GET_PRICE_RANGE, STORE_PRODUCTS, selectProducts } from '../../redux/slice/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import spinnerImg from "./../../assets/loader.gif"
 
@@ -15,6 +15,12 @@ const Product = () => {
     useEffect(() => {
         dispatch(
             STORE_PRODUCTS({
+                products: data,
+            })
+        );
+
+        dispatch(
+            GET_PRICE_RANGE({
                 products: data,
             })
         );
