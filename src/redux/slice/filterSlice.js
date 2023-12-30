@@ -21,32 +21,32 @@ const filterSlice = createSlice({
         },
         SORT_PRODUCTS(state, action) {
             const { sort } = action.payload;
-            let tempProducts = [];
+            let tempProducts = state.filteredProducts.slice();
             if (sort === "latest") {
-                tempProducts = state.filteredProducts.slice().sort((a, b) => {
+                tempProducts = tempProducts.sort((a, b) => {
                     return b.createdAt - a.createdAt;
                 });
             }
 
             if (sort === "lowest-price") {
-                tempProducts = state.filteredProducts.slice().sort((a, b) => {
+                tempProducts = tempProducts.sort((a, b) => {
                     return a.price - b.price;
                 });
             }
 
             if (sort === "highest-price") {
-                tempProducts = state.filteredProducts.slice().sort((a, b) => {
+                tempProducts = tempProducts.sort((a, b) => {
                     return b.price - a.price;
                 });
             }
 
             if (sort === "a-z") {
-                tempProducts = state.filteredProducts.slice().sort((a, b) => {
+                tempProducts = tempProducts.sort((a, b) => {
                     return a.name.localeCompare(b.name);
                 });
             }
             if (sort === "z-a") {
-                tempProducts = state.filteredProducts.slice().sort((a, b) => {
+                tempProducts = tempProducts.sort((a, b) => {
                     return b.name.localeCompare(a.name);
                 });
             }
