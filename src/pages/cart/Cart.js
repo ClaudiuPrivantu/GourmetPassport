@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './Cart.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD_TO_CART, CLEAR_CART, DECREASE_CART, REMOVE_FROM_CART, selectCartItems, selectCartTotalAmount, selectCartTotalQuantity } from '../../redux/slice/cartSlice';
+import { ADD_TO_CART, CALCULATE_SUBTOTAL, CLEAR_CART, DECREASE_CART, REMOVE_FROM_CART, selectCartItems, selectCartTotalAmount, selectCartTotalQuantity } from '../../redux/slice/cartSlice';
 import { Link } from 'react-router-dom';
 import { FaTrashAlt } from 'react-icons/fa';
 import Card from '../../components/card/Card';
@@ -27,6 +27,10 @@ const Cart = () => {
   const clearCart = () => {
     dispatch(CLEAR_CART());
   };
+
+  useEffect(() => {
+    dispatch(CALCULATE_SUBTOTAL());
+  }, [cartItems, dispatch]);
 
   return (
     <section>
