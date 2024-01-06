@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Cart.module.scss'
-import { useSelector } from 'react-redux';
-import { selectCartItems, selectCartTotalAmount, selectCartTotalQuantity } from '../../redux/slice/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { ADD_TO_CART, DECREASE_CART, selectCartItems, selectCartTotalAmount, selectCartTotalQuantity } from '../../redux/slice/cartSlice';
 import { Link } from 'react-router-dom';
 import { FaTrashAlt } from 'react-icons/fa';
 import Card from '../../components/card/Card';
@@ -10,6 +10,15 @@ const Cart = () => {
   const cartItems = useSelector(selectCartItems);
   const cartTotalAmount = useSelector(selectCartTotalAmount);
   const cartTotalQuantity = useSelector(selectCartTotalQuantity);
+  const dispatch = useDispatch();
+
+  const increaseCart = (cart) => {
+    dispatch(ADD_TO_CART(cart));
+  };
+
+  const decreaseCart = (cart) => {
+    dispatch(DECREASE_CART(cart));
+  };
 
   return (
     <section>
@@ -57,6 +66,7 @@ const Cart = () => {
                         <div className={styles.count}>
                           <button
                             className="--btn"
+                            onClick={() => decreaseCart(cart)}
                           >
                             -
                           </button>
@@ -65,6 +75,7 @@ const Cart = () => {
                           </p>
                           <button
                             className="--btn"
+                            onClick={() => increaseCart(cart)}
                           >
                             +
                           </button>
