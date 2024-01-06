@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Cart.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD_TO_CART, DECREASE_CART, selectCartItems, selectCartTotalAmount, selectCartTotalQuantity } from '../../redux/slice/cartSlice';
+import { ADD_TO_CART, DECREASE_CART, REMOVE_FROM_CART, selectCartItems, selectCartTotalAmount, selectCartTotalQuantity } from '../../redux/slice/cartSlice';
 import { Link } from 'react-router-dom';
 import { FaTrashAlt } from 'react-icons/fa';
 import Card from '../../components/card/Card';
@@ -18,6 +18,10 @@ const Cart = () => {
 
   const decreaseCart = (cart) => {
     dispatch(DECREASE_CART(cart));
+  };
+
+  const removeFromCart = (cart) => {
+    dispatch(REMOVE_FROM_CART(cart));
   };
 
   return (
@@ -86,6 +90,7 @@ const Cart = () => {
                         <FaTrashAlt
                           size={19}
                           color="red"
+                          onClick={() => removeFromCart(cart)}
                         />
                       </td>
                     </tr>

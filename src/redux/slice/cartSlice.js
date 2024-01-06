@@ -39,7 +39,7 @@ const cartSlice = createSlice({
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         },
         DECREASE_CART(state, action) {
-            console.log(action.payload);
+            // console.log(action.payload);
             const productIndex = state.cartItems.findIndex(
                 (item) => item.id === action.payload.id
             );
@@ -60,12 +60,25 @@ const cartSlice = createSlice({
             }
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         },
+        REMOVE_FROM_CART(state, action) {
+            const newCartItem = state.cartItems.filter(
+                (item) => item.id !== action.payload.id
+            );
+
+            state.cartItems = newCartItem;
+            toast.success(`Preparatul ${action.payload.name} a fost șters din coș!`, {
+                position: "top-left",
+            });
+
+            localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+        },
     },
 });
 
 export const {
     ADD_TO_CART,
     DECREASE_CART,
+    REMOVE_FROM_CART
 } = cartSlice.actions;
 
 export const selectCartItems = (state) => state.cart.cartItems;
