@@ -6,10 +6,11 @@ import { HiOutlineMenuAlt3 } from 'react-icons/hi'
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "./../../firebase/config"
 import { toast } from 'react-toastify';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from "./../../redux/slice/authSlice";
 import ShowOnLogin, { ShowOnLogout } from '../hiddenLink/hiddenLink'
 import { AdminOnlyLink } from '../adminOnlyRoute/AdminOnlyRoute'
+import { CALCULATE_TOTAL_QUANTITY, selectCartTotalQuantity } from '../../redux/slice/cartSlice'
 
 const logo = (
   <div className={styles.logo}>
@@ -21,23 +22,39 @@ const logo = (
   </div>
 )
 
-const cart = (
-  <span className={styles.cart}>
-    <Link to="/cart">
-      Coșul meu
-      <FaShoppingCart size={20} />
-      <p>0</p>
-    </Link>
-  </span>
-)
 const activeLink = ({ isActive }) => (isActive ? `${styles.active}` : "");
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [displayName, setDisplayName] = useState("");
+  const [scrollPage, setScrollPage] = useState(false);
+  const cartTotalQuantity = useSelector(selectCartTotalQuantity);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(CALCULATE_TOTAL_QUANTITY());
+  }, []);
+
+  const cart = (
+    <span className={styles.cart}>
+      <Link to="/cart">
+        Coșul meu
+        <FaShoppingCart size={20} />
+        <p>{cartTotalQuantity}</p>
+      </Link>
+    </span>
+  )
+
+  const fixNavbar = () => {
+    if (window.scrollY > 50) {
+      setScrollPage(true);
+    } else {
+      setScrollPage(false);
+    }
+  };
+  window.addEventListener("scroll", fixNavbar);
 
   //Monitor currently sign in user
   useEffect(() => {
@@ -83,71 +100,73 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <div className={styles.header}>
-        {logo}
+    <>
+      <header className={scrollPage ? `${styles.fixed}` : null}>
+        <div className={styles.header}>
+          {logo}
 
-        <nav className={
-          showMenu ? `${styles["show-nav"]}` : `${styles["hide-nav"]}`
-        }>
-          <div className={
-            showMenu
-              ? `${styles["nav-wrapper"]} ${styles["show-nav-wrapper"]}`
-              : `${styles["nav-wrapper"]}`
-          }
-            onClick={hideMenu}
-          ></div>
-          <ul onClick={hideMenu}>
-            <li className={styles["logo-mobile"]}>
-              {logo}
-            </li>
-            <li>
-              <AdminOnlyLink>
-                <Link to="/admin/home">
-                  <button className="--btn --btn-primary">
-                    Admin
-                  </button>
-                </Link>
-              </AdminOnlyLink>
-            </li>
-            <li>
-              <NavLink to="/" className={activeLink}>
-                Acasă
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/contact" className={activeLink}>
-                Contactează-ne
-              </NavLink>
-            </li>
-          </ul>
-          <div className={styles["header-right"]} onClick={hideMenu}>
-            <span className={styles.links}>
-              <ShowOnLogout>
-                <NavLink to="/login" className={activeLink}>Login</NavLink>
-              </ShowOnLogout>
-              <ShowOnLogin>
-                <a href="#home" style={{ color: "#F0A500" }}>
-                  <FaUserCircle size={16} />
-                  Bună, {displayName}
-                </a>
-                <NavLink to="/order-history" className={activeLink}>Comenzile mele</NavLink>
-                <NavLink to="/" onClick={logoutUser}>Logout</NavLink>
-              </ShowOnLogin>
-            </span>
+          <nav className={
+            showMenu ? `${styles["show-nav"]}` : `${styles["hide-nav"]}`
+          }>
+            <div className={
+              showMenu
+                ? `${styles["nav-wrapper"]} ${styles["show-nav-wrapper"]}`
+                : `${styles["nav-wrapper"]}`
+            }
+              onClick={hideMenu}
+            ></div>
+            <ul onClick={hideMenu}>
+              <li className={styles["logo-mobile"]}>
+                {logo}
+              </li>
+              <li>
+                <AdminOnlyLink>
+                  <Link to="/admin/home">
+                    <button className="--btn --btn-primary">
+                      Admin
+                    </button>
+                  </Link>
+                </AdminOnlyLink>
+              </li>
+              <li>
+                <NavLink to="/" className={activeLink}>
+                  Acasă
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/contact" className={activeLink}>
+                  Contactează-ne
+                </NavLink>
+              </li>
+            </ul>
+            <div className={styles["header-right"]} onClick={hideMenu}>
+              <span className={styles.links}>
+                <ShowOnLogout>
+                  <NavLink to="/login" className={activeLink}>Login</NavLink>
+                </ShowOnLogout>
+                <ShowOnLogin>
+                  <a href="#home" style={{ color: "#F0A500" }}>
+                    <FaUserCircle size={16} />
+                    Bună, {displayName}
+                  </a>
+                  <NavLink to="/order-history" className={activeLink}>Comenzile mele</NavLink>
+                  <NavLink to="/" onClick={logoutUser}>Logout</NavLink>
+                </ShowOnLogin>
+              </span>
+              {cart}
+            </div>
+          </nav>
+
+          <div className={styles["menu-icon"]}>
             {cart}
+            <HiOutlineMenuAlt3 size={28} onClick={toggleMenu}>
+
+            </HiOutlineMenuAlt3>
           </div>
-        </nav>
 
-        <div className={styles["menu-icon"]}>
-          {cart}
-          <HiOutlineMenuAlt3 size={28} onClick={toggleMenu}>
-
-          </HiOutlineMenuAlt3>
         </div>
-
-      </div>
-    </header>
+      </header>
+    </>
   )
 }
 
