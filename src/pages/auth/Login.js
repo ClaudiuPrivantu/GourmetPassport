@@ -9,13 +9,25 @@ import { toast } from 'react-toastify';
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "./../../firebase/config"
 import Loader from './../../components/loader/Loader'
+import { useSelector } from 'react-redux'
+import { selectPreviousURL } from '../../redux/slice/cartSlice'
 
 const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false)
 
+    const previousURL = useSelector(selectPreviousURL);
+
     const navigate = useNavigate()
+
+    const redirectUser = () => {
+        if (previousURL.includes("cart")) {
+            navigate("/cart");
+        } else {
+            navigate("/");
+        }
+    };
 
     const loginUser = (e) => {
         e.preventDefault()
@@ -28,7 +40,7 @@ const Login = () => {
                 console.log(user)
                 setIsLoading(false)
                 toast.success("V-ați autentificat cu succes!")
-                navigate("/")
+                redirectUser()
             })
             .catch((error) => {
                 toast.error(error.message)
@@ -43,7 +55,7 @@ const Login = () => {
                 const user = result.user;
                 console.log(user)
                 toast.success("V-ați autentificat cu succes!")
-                navigate("/")
+                redirectUser()
             }).catch((error) => {
                 toast.error(error.message)
             });
