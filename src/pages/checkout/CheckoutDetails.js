@@ -4,6 +4,7 @@ import Card from '../../components/card/Card';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { SAVE_BILLING_ADDRESS, SAVE_SHIPPING_ADDRESS } from '../../redux/slice/checkoutSlice';
+import CheckoutSummary from '../../components/checkoutSummary/CheckoutSummary';
 
 const initialAddressState = {
     name: "",
@@ -239,6 +240,11 @@ const CheckoutDetails = () => {
                             <button type="submit" className="--btn --btn-primary">
                                 Continuă către plată
                             </button>
+                        </Card>
+                    </div>
+                    <div>
+                        <Card cardClass={styles.card}>
+                            <CheckoutSummary />
                         </Card>
                     </div>
                 </form>
