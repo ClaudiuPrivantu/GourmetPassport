@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import styles from './CheckoutDetails.module.scss'
 import Card from '../../components/card/Card';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { SAVE_BILLING_ADDRESS, SAVE_SHIPPING_ADDRESS } from '../../redux/slice/checkoutSlice';
 
 const initialAddressState = {
     name: "",
@@ -20,11 +23,15 @@ const CheckoutDetails = () => {
     const [billingAddress, setBillingAddress] = useState({
         ...initialAddressState,
     });
+
     const countries = [
         "România",
         "Ungaria",
         "Serbia",
     ];
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleShipping = (e) => {
         const { name, value } = e.target;
@@ -44,8 +51,11 @@ const CheckoutDetails = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(shippingAddress);
-        console.log(billingAddress);
+        // console.log(shippingAddress);
+        // console.log(billingAddress);
+        dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress));
+        dispatch(SAVE_BILLING_ADDRESS(billingAddress));
+        navigate("/checkout");
     };
 
     return (

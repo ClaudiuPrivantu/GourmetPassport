@@ -1,10 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Header, Footer, AdminOnlyRoute, ProductDetails } from './components';
-import { Home, Contact, Login, Register, Reset, Admin, Cart } from './pages';
+import { Home, Contact, Login, Register, Reset, Admin, Cart, CheckoutDetails, Checkout } from './pages';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import CheckoutDetails from './pages/checkout/CheckoutDetails';
 
 function App() {
   return (
@@ -21,6 +20,7 @@ function App() {
           <Route path='/product-details/:id' element={<ProductDetails />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/checkout-details' element={<CheckoutDetails />} />
+          <Route path='/checkout' element={<Checkout />} />
 
           {/* the admin page is accessible only when the admin user is logged in */}
           <Route path='/admin/*' element={
