@@ -8,8 +8,8 @@ import CheckoutSummary from '../../components/checkoutSummary/CheckoutSummary';
 
 const initialAddressState = {
     name: "",
-    street_name: "",
-    street_number: "",
+    line1: "",
+    line2: "",
     country: "România",
     state: "",
     city: "",
@@ -52,7 +52,7 @@ const CheckoutDetails = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(shippingAddress);
+        console.log(shippingAddress);
         // console.log(billingAddress);
         dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress));
         dispatch(SAVE_BILLING_ADDRESS(billingAddress));
@@ -76,22 +76,22 @@ const CheckoutDetails = () => {
                                 value={shippingAddress.name}
                                 onChange={(e) => handleShipping(e)}
                             />
-                            <label>Numele străzii:</label>
+                            <label>Numele și numărul străzii:</label>
                             <input
                                 type="text"
-                                placeholder="Numele străzii"
+                                placeholder="Numele și numărul străzii"
                                 required
-                                name="street_name"
-                                value={shippingAddress.street_name}
+                                name="line1"
+                                value={shippingAddress.line1}
                                 onChange={(e) => handleShipping(e)}
                             />
-                            <label>Numărul străzii:</label>
+                            <label>Informații specifice (blocul, scara, apartamentul etc.):</label>
                             <input
                                 type="text"
-                                placeholder="Numărul străzii"
+                                placeholder="Blocul, scara, apartamentul etc."
                                 required
-                                name="street_number"
-                                value={shippingAddress.street_number}
+                                name="line2"
+                                value={shippingAddress.line2}
                                 onChange={(e) => handleShipping(e)}
                             />
                             <label>Țară:</label>
@@ -163,22 +163,22 @@ const CheckoutDetails = () => {
                                 value={billingAddress.name}
                                 onChange={(e) => handleBilling(e)}
                             />
-                            <label>Numele străzii:</label>
+                            <label>Numele și numărul străzii:</label>
                             <input
                                 type="text"
-                                placeholder="Numele străzii"
+                                placeholder="Numele și numărul străzii"
                                 required
-                                name="street_name"
-                                value={billingAddress.street_name}
+                                name="line1"
+                                value={billingAddress.line1}
                                 onChange={(e) => handleBilling(e)}
                             />
-                            <label>Numărul străzii:</label>
+                            <label>Informații specifice (blocul, scara, apartamentul etc.):</label>
                             <input
                                 type="text"
-                                placeholder="Numărul străzii"
+                                placeholder="Blocul, scara, apartamentul etc."
                                 required
-                                name="street_number"
-                                value={billingAddress.street_number}
+                                name="line2"
+                                value={billingAddress.line2}
                                 onChange={(e) => handleBilling(e)}
                             />
                             <label>Țară:</label>
