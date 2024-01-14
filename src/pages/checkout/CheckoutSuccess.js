@@ -1,9 +1,20 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const CheckoutSuccess = () => {
     return (
-        <div>CheckoutSuccess</div>
-    )
-}
+        <section>
+            <div className="container">
+                <h2>Comanda a fost plasată cu succes!</h2>
+                <p>Mulțumim pentru comandă!</p>
+                <br />
 
-export default CheckoutSuccess
+                <button className="--btn --btn-primary">
+                    <Link to="/order-history">View Order Status</Link>
+                </button>
+            </div>
+        </section>
+    );
+};
+
+export default CheckoutSuccess;
