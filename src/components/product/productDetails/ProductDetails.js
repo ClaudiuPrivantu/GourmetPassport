@@ -8,6 +8,9 @@ import spinnerImg from './../../../assets/loader.gif'
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY, DECREASE_CART, selectCartItems } from '../../../redux/slice/cartSlice';
 import useFetchDocument from '../../../customHooks/useFetchDocument';
+import useFetchCollection from '../../../customHooks/useFetchCollection';
+import Card from '../../card/Card';
+import StarsRating from 'react-star-rate';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -21,6 +24,8 @@ const ProductDetails = () => {
   });
 
   const { document } = useFetchDocument("products", id)
+  const { data } = useFetchCollection("reviews");
+  const filteredReviews = data.filter((review) => review.productID === id);
 
   useEffect(() => {
     setProduct(document)
@@ -93,6 +98,33 @@ const ProductDetails = () => {
             </div>
           </>
         )}
+        <Card cardClass={styles.card}>
+          <h3>Recenzii din partea clienților</h3>
+          <div>
+            {filteredReviews.length === 0 ? (
+              <p>Momentan nu sunt recenzii pentru acest preparat.</p>
+            ) : (
+              <>
+                {filteredReviews.map((item, index) => {
+                  const { rate, review, reviewDate, userName } = item;
+                  return (
+                    <div key={index} className={styles.review}>
+                      <StarsRating value={rate} />
+                      <p>{review}</p>
+                      <span>
+                        <b>{reviewDate}</b>
+                      </span>
+                      <br />
+                      <span>
+                        <b>Client: {userName}</b>
+                      </span>
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </div>
+        </Card>
       </div>
     </section>
   );
