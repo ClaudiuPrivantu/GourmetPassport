@@ -64,7 +64,7 @@ const OrderDetails = () => {
                                                     style={{ width: "100px" }}
                                                 />
                                             </td>
-                                            <td>{price}</td>
+                                            <td>{price} LEI</td>
                                             <td>{cartQuantity}</td>
                                             <td>{(price * cartQuantity)} LEI</td>
                                             <td className={styles.icons}>
