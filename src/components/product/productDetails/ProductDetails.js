@@ -7,6 +7,7 @@ import styles from './ProductDetails.module.scss'
 import spinnerImg from './../../../assets/loader.gif'
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY, DECREASE_CART, selectCartItems } from '../../../redux/slice/cartSlice';
+import useFetchDocument from '../../../customHooks/useFetchDocument';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -19,25 +20,11 @@ const ProductDetails = () => {
     return cart.id === id;
   });
 
-  const getProduct = async () => {
-    const docRef = doc(db, "products", id);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      // console.log("Document data:", docSnap.data());
-      const obj = {
-        id: id,
-        ...docSnap.data()
-      }
-      setProduct(obj)
-    } else {
-      toast.error("Preparatul nu a fost găsit!");
-    }
-  }
+  const { document } = useFetchDocument("products", id)
 
   useEffect(() => {
-    getProduct();
-  }, []);
+    setProduct(document)
+  }, [document]);
 
   const addToCart = (product) => {
     dispatch(ADD_TO_CART(product));
