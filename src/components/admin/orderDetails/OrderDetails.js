@@ -3,6 +3,7 @@ import styles from './OrderDetails.module.scss'
 import { Link, useParams } from 'react-router-dom';
 import useFetchDocument from '../../../customHooks/useFetchDocument';
 import spinnerImg from './../../../assets/loader.gif'
+import ChangeOrderStatus from '../changeOrderStatus/ChangeOrderStatus';
 
 const OrderDetails = () => {
     const [order, setOrder] = useState(null);
@@ -80,6 +81,7 @@ const OrderDetails = () => {
                         </table>
                     </>
                 )}
+                <ChangeOrderStatus order={order} id={id} />
             </div>
         </>
     );

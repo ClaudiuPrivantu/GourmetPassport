@@ -26,7 +26,7 @@ const Orders = () => {
       <div className={styles.order}>
         <h2>Comenzi</h2>
         <p>
-          Puteți deschide o comandă pentru a modifica <b>statusul</b> unei comenzi
+          Puteți deschide o comandă pentru a actualiza <b>statusul</b> unei comenzi
         </p>
         <br />
         <>
