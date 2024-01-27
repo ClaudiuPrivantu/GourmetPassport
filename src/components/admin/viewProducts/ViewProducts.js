@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './ViewProducts.module.scss'
 import { toast } from 'react-toastify'
 import { deleteDoc, doc } from 'firebase/firestore'
@@ -11,10 +11,14 @@ import Notiflix from 'notiflix'
 import { useDispatch, useSelector } from 'react-redux'
 import { STORE_PRODUCTS, selectProducts } from '../../../redux/slice/productSlice'
 import useFetchCollection from '../../../customHooks/useFetchCollection'
+import { FILTER_BY_SEARCH, selectFilteredProducts } from '../../../redux/slice/filterSlice'
+import Search from '../../search/Search'
 
 const ViewProducts = () => {
+  const [search, setSearch] = useState("");
   const { data, isLoading } = useFetchCollection("products")
   const products = useSelector(selectProducts)
+  const filteredProducts = useSelector(selectFilteredProducts);
 
   const dispatch = useDispatch();
 
@@ -25,6 +29,10 @@ const ViewProducts = () => {
       })
     );
   }, [dispatch, data]);
+
+  useEffect(() => {
+    dispatch(FILTER_BY_SEARCH({ products, search }));
+  }, [dispatch, products, search]);
 
   const confirmDelete = (id, imageURL) => {
     Notiflix.Confirm.show(
@@ -68,11 +76,12 @@ const ViewProducts = () => {
 
         <div className={styles.search}>
           <p>
-            <b>{products.length}</b> produse disponibile
+            <b>{filteredProducts.length}</b> produse disponibile
           </p>
+          <Search value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
 
-        {products.length === 0 ? (
+        {filteredProducts.length === 0 ? (
           <p>Nu a fost găsit niciun produs.</p>
         ) : (
           <table>
@@ -87,7 +96,7 @@ const ViewProducts = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product, index) => {
+              {filteredProducts.map((product, index) => {
                 const { id, name, price, imageURL, country, continent } = product;
                 return (
 
