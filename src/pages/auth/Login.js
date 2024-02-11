@@ -37,7 +37,7 @@ const Login = () => {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                console.log(user)
+                // console.log(user)
                 setIsLoading(false)
                 toast.success("V-ați autentificat cu succes!")
                 redirectUser()
@@ -53,7 +53,7 @@ const Login = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
                 const user = result.user;
-                console.log(user)
+                // console.log(user)
                 toast.success("V-ați autentificat cu succes!")
                 redirectUser()
             }).catch((error) => {

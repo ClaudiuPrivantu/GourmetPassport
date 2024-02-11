@@ -25,7 +25,7 @@ const ProductFilter = () => {
     ...new Set(filteredProductsByContinent.map((product) => product.country)),
   ];
 
-  console.log(uniqueCountries);
+  // console.log(uniqueCountries);
 
   const filterProducts = (cont) => {
     setContinent(cont);

@@ -10,7 +10,7 @@ const filterSlice = createSlice({
     initialState,
     reducers: {
         FILTER_BY_SEARCH(state, action) {
-            console.log(action.payload);
+            // console.log(action.payload);
             const { products, search } = action.payload;
             const tempProducts = products.filter(
                 (product) =>

@@ -56,7 +56,7 @@ const ViewProducts = () => {
         deleteProduct(id, imageURL);
       },
       function cancelCb() {
-        console.log("Delete Canceled");
+        // console.log("Delete Canceled");
       },
       {
         width: "320px",

@@ -10,7 +10,7 @@ const CheckoutSuccess = () => {
                 <br />
 
                 <button className="--btn --btn-primary">
-                    <Link to="/order-history">View Order Status</Link>
+                    <Link to="/order-history">Monitorizează statusul comenzii</Link>
                 </button>
             </div>
         </section>

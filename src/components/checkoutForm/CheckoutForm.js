@@ -48,7 +48,7 @@ const CheckoutForm = () => {
 
     // Save order to Order History
     const saveOrder = () => {
-        console.log("Order saved")
+        // console.log("Order saved")
         const today = new Date();
         const date = today.toDateString();
         const time = today.toLocaleTimeString();
