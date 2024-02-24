@@ -7,7 +7,7 @@ import { getStorage } from "firebase/storage";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 export const firebaseConfig = {
-  apiKey: "AIzaSyAsP6REPIJCayyWEiM7ZeadJfLdPyqweww",
+  apiKey: process.env.REACT_APP_FB_API_KEY,
   authDomain: "gourmetpassport-be2c1.firebaseapp.com",
   projectId: "gourmetpassport-be2c1",
   storageBucket: "gourmetpassport-be2c1.appspot.com",
