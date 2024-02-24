@@ -36,8 +36,8 @@ const Checkout = () => {
         // http://localhost:4242/create-payment-intent
 
         // For the onlinehost/deployed app we will use the link provided by the host site, one with https:
-        // https://
-        fetch("http://localhost:4242/create-payment-intent", {
+        // https://gourmetpassport.onrender.com
+        fetch("https://gourmetpassport.onrender.com/create-payment-intent", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
