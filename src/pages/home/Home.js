@@ -1,27 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Slider from '../../components/slider/Slider'
-import Product from '../../components/product/Product'
+import AboutUs from '../../components/aboutUs/AboutUs'
 
 const Home = () => {
-  const url = window.location.href;
-  
-  useEffect(() => {
-    const scrollToProducts = () => {
-      if (url.includes("#products")) {
-        window.scrollTo({
-          top: 750,
-          behavior: "smooth",
-        });
-        return;
-      }
-    };
-    scrollToProducts();
-  }, [url]);
 
   return (
     <>
       <Slider />
-      <Product />
+      <AboutUs />
     </>
   )
 }

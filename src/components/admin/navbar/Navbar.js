@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { selectUserName } from '../../../redux/slice/authSlice';
 import styles from "./Navbar.module.scss"
-import { GiCook } from 'react-icons/gi';
+import { MdAdminPanelSettings } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 
 const activeLink = ({ isActive }) => (isActive ? `${styles.active}` : "");
@@ -13,7 +13,7 @@ const Navbar = () => {
   return (
     <div className={styles.navbar}>
       <div className={styles.user}>
-        <GiCook size={150} color="#fff" />
+        <MdAdminPanelSettings size={150} color="#fff" />
         <h4>{userName}</h4>
       </div>
       <nav>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Header, Footer, AdminOnlyRoute, ProductDetails, ReviewProducts } from './components';
-import { Home, Contact, Login, Register, Reset, Admin, Cart, CheckoutDetails, Checkout, CheckoutSuccess, OrderHistory, OrderDetails, NotFound } from './pages';
+import { Header, Footer, AdminOnlyRoute, ProductDetails, ReviewProducts, Product } from './components';
+import { Home, Contact, Login, Register, Reset, Admin, Cart, CheckoutDetails, Checkout, CheckoutSuccess, OrderHistory, OrderDetails, NotFound, Client } from './pages';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -25,6 +25,8 @@ function App() {
           <Route path='/order-history' element={<OrderHistory />} />
           <Route path='/order-details/:id' element={<OrderDetails />} />
           <Route path='/review-product/:id' element={<ReviewProducts />} />
+          <Route path='/client-account' element={<Client />} />
+          <Route path='/products' element={<Product />} />
           <Route path='*' element={<NotFound />} />
 
           {/* the admin page is accessible only when the admin user is logged in */}

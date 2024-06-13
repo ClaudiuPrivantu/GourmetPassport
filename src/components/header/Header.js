@@ -9,8 +9,8 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from "react-redux";
 import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from "./../../redux/slice/authSlice";
 import ShowOnLogin, { ShowOnLogout } from '../hiddenLink/hiddenLink'
-import { AdminOnlyLink } from '../adminOnlyRoute/AdminOnlyRoute'
 import { CALCULATE_TOTAL_QUANTITY, selectCartTotalQuantity } from '../../redux/slice/cartSlice'
+import { ClientOnlyLink } from '../clientOnlyRoute/ClientOnlyRoute'
 
 const logo = (
   <div className={styles.logo}>
@@ -120,13 +120,24 @@ const Header = () => {
                 {logo}
               </li>
               <li>
-                <AdminOnlyLink>
-                  <Link to="/admin/home">
-                    <button className="--btn --btn-primary">
-                      Admin
-                    </button>
-                  </Link>
-                </AdminOnlyLink>
+                <ShowOnLogin>
+                  <ClientOnlyLink
+                    clientChildren={
+                      <Link to="/client-account">
+                        <button className="--btn --btn-primary">
+                          Contul meu
+                        </button>
+                      </Link>
+                    }
+                    adminChildren={
+                      <Link to="/admin/home">
+                        <button className="--btn --btn-primary">
+                          Admin
+                        </button>
+                      </Link>
+                    }
+                  />
+                </ShowOnLogin>
               </li>
               <li>
                 <NavLink to="/" className={activeLink}>
@@ -149,7 +160,6 @@ const Header = () => {
                     <FaUserCircle size={16} />
                     Bună, {displayName}
                   </a>
-                  <NavLink to="/order-history" className={activeLink}>Comenzile mele</NavLink>
                   <NavLink to="/" onClick={logoutUser}>Logout</NavLink>
                 </ShowOnLogin>
               </span>

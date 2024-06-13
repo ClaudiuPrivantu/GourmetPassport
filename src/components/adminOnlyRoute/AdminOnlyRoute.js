@@ -24,13 +24,4 @@ const AdminOnlyRoute = ({children}) => {
     );
 };
 
-export const AdminOnlyLink = ({children}) => {
-    const userEmail = useSelector(selectEmail);
-    
-    if(userEmail === "admin@gmail.com"){
-        return children;
-    }
-    return null;
-};
-
 export default AdminOnlyRoute
