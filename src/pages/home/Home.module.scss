@@ -1,0 +1,37 @@
+.homeStylish {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: black;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .slider, .aboutUs {
+        margin-bottom: 2rem;
+    }
+
+    button {
+        margin-top: 2rem;
+        padding: 1rem 2rem;
+        font-size: 1.6rem;
+        color: #fff;
+        background-color: #b92020cb;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #921919;
+        }
+    }
+}

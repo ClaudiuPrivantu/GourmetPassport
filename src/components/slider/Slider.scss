@@ -4,6 +4,7 @@
     position: relative;
     overflow: hidden;
     background-color: var(--color-dark);
+    border-radius: 100px;
 }
 
 .slide {
@@ -44,6 +45,7 @@
     background: rgba(0, 0, 0, 0.4);
     animation: slide-up 1s ease 0.5s;
     animation-fill-mode: forwards;
+    border-radius: 100px;
 
     h2 {
         font-size: 4.5rem;

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ProductList.module.scss'
-import { BsFillGridFill } from "react-icons/bs";
-import { FaListAlt } from "react-icons/fa";
+import { BsGrid3X3GapFill, BsListUl } from "react-icons/bs";
 import Search from '../../search/Search';
 import ProductItem from '../productItem/ProductItem';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,13 +38,13 @@ const ProductList = ({ products }) => {
     <div className={styles["product-list"]} id="product">
       <div className={styles.top}>
         <div className={styles.icons}>
-          <BsFillGridFill
+          <BsGrid3X3GapFill
             size={22}
             color="orangered"
             onClick={() => setGrid(true)}
           />
 
-          <FaListAlt size={24} color="rgb(117, 90, 137)" onClick={() => setGrid(false)} />
+          <BsListUl size={24} color="rgb(117, 90, 137)" onClick={() => setGrid(false)} />
 
           <p>
             <b>{filteredProducts.length}</b> preparate găsite

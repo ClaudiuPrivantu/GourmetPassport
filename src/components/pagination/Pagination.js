@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styles from './Pagination.module.scss'
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 const Pagination = ({
     currentPage,
@@ -50,7 +51,7 @@ const Pagination = ({
                 onClick={paginatePrev}
                 className={currentPage === pageNumbers[0] ? `${styles.hidden}` : null}
             >
-                Înapoi
+                <IoIosArrowBack className={styles.arrow} />
             </li>
 
             {pageNumbers.map((number) => {
@@ -75,7 +76,7 @@ const Pagination = ({
                         : null
                 }
             >
-                Înainte
+                <IoIosArrowForward className={styles.arrow} />
             </li>
 
             <p>

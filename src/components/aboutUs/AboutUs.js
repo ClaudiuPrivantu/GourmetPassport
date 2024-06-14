@@ -3,12 +3,12 @@ import styles from './AboutUs.module.scss';
 import Card from '../../components/card/Card';
 import { FaInstagram, FaPhoneAlt } from 'react-icons/fa';
 import { FaLocationDot } from 'react-icons/fa6';
+import ExploreProducts from '../exploreProducts/ExploreProducts';
 
 const AboutUs = () => {
     return (
         <section>
             <div className={`container ${styles.about}`}>
-                <h2>Despre Noi</h2>
                 <div className={styles.section}>
                     <div className={styles.details}>
                         <Card cardClass={styles.card}>
@@ -50,6 +50,7 @@ const AboutUs = () => {
                     </div>
                 </div>
             </div>
+            <ExploreProducts />
         </section>
     );
 };

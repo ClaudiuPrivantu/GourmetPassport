@@ -12,6 +12,7 @@ import StarsRating from 'react-star-rate';
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [showFullDescription, setShowFullDescription] = useState(false);
   const dispatch = useDispatch();
 
   const cartItems = useSelector(selectCartItems);
@@ -38,12 +39,19 @@ const ProductDetails = () => {
     dispatch(CALCULATE_TOTAL_QUANTITY());
   };
 
+  const getShortenedDescription = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return `${text.substring(0, maxLength)}...`;
+    }
+    return text;
+  };
+
   return (
     <section>
       <div className={`container ${styles.product}`}>
         <h2>Detaliile preparatului</h2>
         <div>
-          <Link to="/#products">&larr; Înapoi la preparate</Link>
+          <Link to="/products">&larr; Înapoi la preparate</Link>
         </div>
         {product === null ? (
           <img src={spinnerImg} alt="Loading" style={{ width: "40%" }} />
@@ -56,13 +64,36 @@ const ProductDetails = () => {
               <div className={styles.content}>
                 <h3>{product.name}</h3>
                 <p className={styles.price}>{`${product.price} LEI`}</p>
-                <p>{product.desc}</p>
                 <p>
                   <b>Serie:</b> {product.id}
                 </p>
                 <p>
                   <b>Origine:</b> {`${product.continent} - ${product.country}`}
                 </p>
+                <p>
+                  {showFullDescription ? (
+                    <>
+                      {product.desc}
+                      <button
+                        className="--btn --btn-link"
+                        onClick={() => setShowFullDescription(false)}
+                      >
+                        Afișează mai puțin
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      {getShortenedDescription(product.desc, 150)}
+                      <button
+                        className="--btn --btn-link"
+                        onClick={() => setShowFullDescription(true)}
+                      >
+                        Afișează mai mult
+                      </button>
+                    </>
+                  )}
+                </p>
+
 
                 <div className={styles.count}>
                   {isCartAdded < 0 ? null : (

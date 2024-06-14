@@ -29,10 +29,10 @@ const ProductItem = ({ product, grid, id, name, price, desc, imageURL }) => {
       </Link>
       <div className={styles.content}>
         <div className={styles.details}>
+          <h4>{shortenText(name, 30)}</h4>
           <p>{`${price} LEI`}</p>
-          <h4>{shortenText(name, 21)}</h4>
         </div>
-        {!grid && <p className={styles.desc}>{shortenText(desc, 200)}</p>}
+        {!grid && <p className={styles.desc}>{shortenText(desc, 250)}</p>}
 
         <button
           className="--btn --btn-primary"
