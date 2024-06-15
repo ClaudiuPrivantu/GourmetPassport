@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     filteredProducts: [],
     filteredProductsByContinent: [],
+    filteredProductsByCountry: [],
 };
 
 const filterSlice = createSlice({
@@ -74,13 +75,13 @@ const filterSlice = createSlice({
             } else {
                 tempProducts = state.filteredProductsByContinent.filter((product) => product.country === country);
             }
+            state.filteredProductsByCountry = tempProducts;
             state.filteredProducts = tempProducts;
         },
         FILTER_BY_PRICE(state, action) {
-            const { products, price } = action.payload;
+            const { price } = action.payload;
             let tempProducts = [];
-            tempProducts = products.filter((product) => product.price <= price);
-
+            tempProducts = state.filteredProductsByCountry.filter((product) => product.price <= price);
             state.filteredProducts = tempProducts;
         },
     },

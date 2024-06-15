@@ -1,6 +1,16 @@
 .product-list {
     width: 100%;
 
+    .card {
+        padding: 1.5rem;
+        border-radius: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        color: inherit;
+        margin-bottom: 2rem;
+        cursor: pointer;
+    }
+
     .top {
         width: 100%;
         border-bottom: 2px solid #ccc;
