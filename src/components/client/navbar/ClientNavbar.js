@@ -23,6 +23,11 @@ const ClientNavbar = () => {
               Comenzile mele
             </NavLink>
           </li>
+          <li>
+            <NavLink to="/client-reviews" className={activeLink}>
+              Recenziile mele
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </div>

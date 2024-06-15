@@ -68,11 +68,17 @@ const OrderDetails = () => {
                                             <td>{cartQuantity}</td>
                                             <td>{(price * cartQuantity)} LEI</td>
                                             <td className={styles.icons}>
-                                                <button className="--btn --btn-primary">
-                                                    <Link to={`/review-product/${id}`}>
-                                                        Review preparat
-                                                    </Link>
-                                                </button>
+                                                {order.orderStatus === 'Livrată' ? (
+                                                    <button className="--btn --btn-primary">
+                                                        <Link to={`/review-product/${id}`}>
+                                                            Review preparat
+                                                        </Link>
+                                                    </button>
+                                                ) : (
+                                                    <div className={styles.message}>
+                                                        După ce comanda va fi livrată veți putea lăsa o recenzie.
+                                                    </div>
+                                                )}
                                             </td>
                                         </tr>
                                     );
